@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CashCramming — The Calm Side of Finance</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow+Condensed:wght@700;800;900&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Instrument Sans',sans-serif;background:#f5f2ed;color:#1b3022;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(245,242,237,0.95);backdrop-filter:blur(8px);border-bottom:0.5px solid rgba(27,48,34,0.1);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#1b3022;text-decoration:none;letter-spacing:0.02em;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#708090;text-decoration:none;font-weight:500;transition:color 0.2s;}
+.nav-links a:hover{color:#1b3022;}
+.nav-cta{background:#1b3022;color:#f5f2ed;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:8px 18px;text-decoration:none;font-weight:500;transition:opacity 0.2s;}
+.nav-cta:hover{opacity:0.8;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{width:22px;height:1.5px;background:#1b3022;display:block;transition:all 0.3s;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:0 5%;padding-top:64px;position:relative;overflow:hidden;background:#f5f2ed;}
+.hero-bg-text{position:absolute;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28vw;color:rgba(27,48,34,0.04);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;letter-spacing:-0.02em;text-transform:uppercase;}
+.hero-content{max-width:700px;position:relative;z-index:1;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px;}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:#708090;}
+.hero-tag-text{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#708090;font-weight:500;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,88px);font-weight:600;color:#1b3022;line-height:0.95;margin-bottom:24px;letter-spacing:-0.01em;}
+.hero-title span{font-style:italic;color:#708090;}
+.hero-sub{font-size:16px;color:#708090;font-weight:300;line-height:1.7;max-width:480px;margin-bottom:40px;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-primary{background:#1b3022;color:#f5f2ed;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;text-decoration:none;font-weight:500;transition:opacity 0.2s;display:inline-block;}
+.btn-primary:hover{opacity:0.8;}
+.btn-secondary{border:0.5px solid #1b3022;color:#1b3022;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;text-decoration:none;font-weight:500;transition:all 0.2s;display:inline-block;}
+.btn-secondary:hover{background:#1b3022;color:#f5f2ed;}
+.hero-scroll{position:absolute;bottom:40px;left:5%;display:flex;align-items:center;gap:10px;}
+.hero-scroll-line{width:40px;height:1px;background:#708090;}
+.hero-scroll-text{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#708090;}
+
+/* ABOUT */
+.about{padding:120px 5%;background:#1b3022;position:relative;overflow:hidden;}
+.about-bg{position:absolute;right:-5%;top:50%;transform:translateY(-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20vw;color:rgba(245,242,237,0.03);pointer-events:none;text-transform:uppercase;}
+.section-tag{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#708090;font-weight:500;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.section-tag::after{content:'';flex:1;height:1px;background:rgba(112,128,144,0.3);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.about-left .about-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:600;color:#f5f2ed;line-height:1.1;margin-bottom:24px;}
+.about-left .about-title em{font-style:italic;color:#708090;}
+.about-left p{font-size:15px;color:rgba(245,242,237,0.55);line-height:1.8;font-weight:300;margin-bottom:16px;}
+.about-right{display:flex;flex-direction:column;gap:24px;}
+.about-stat{border-top:0.5px solid rgba(112,128,144,0.2);padding-top:20px;}
+.about-stat-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;color:#f5f2ed;line-height:1;margin-bottom:4px;}
+.about-stat-label{font-size:12px;color:#708090;letter-spacing:0.06em;}
+
+/* SERVICES */
+.services{padding:120px 5%;background:#f5f2ed;}
+.services-header{margin-bottom:60px;}
+.services-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:600;color:#1b3022;line-height:1.1;margin-bottom:16px;}
+.services-sub{font-size:15px;color:#708090;font-weight:300;max-width:480px;line-height:1.7;}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;}
+.service-card{background:#fff;padding:40px;border:0.5px solid rgba(27,48,34,0.08);transition:all 0.3s;cursor:default;}
+.service-card:hover{background:#1b3022;transform:translateY(-4px);}
+.service-card:hover .service-num{color:rgba(245,242,237,0.1);}
+.service-card:hover .service-name{color:#f5f2ed;}
+.service-card:hover .service-desc{color:rgba(245,242,237,0.55);}
+.service-card:hover .service-price{color:#708090;border-color:rgba(112,128,144,0.3);}
+.service-card:hover .service-tag{color:#708090;}
+.service-num{font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;color:rgba(27,48,34,0.06);line-height:1;margin-bottom:-10px;transition:color 0.3s;}
+.service-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#708090;margin-bottom:12px;transition:color 0.3s;}
+.service-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#1b3022;line-height:1.2;margin-bottom:12px;transition:color 0.3s;}
+.service-desc{font-size:13px;color:#708090;line-height:1.7;font-weight:300;margin-bottom:20px;transition:color 0.3s;}
+.service-price{display:inline-block;border:0.5px solid rgba(27,48,34,0.2);padding:6px 14px;font-size:12px;color:#1b3022;letter-spacing:0.06em;transition:all 0.3s;}
+
+/* BLOG */
+.blog{padding:120px 5%;background:#0f1a14;}
+.blog-header{margin-bottom:60px;}
+.blog-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:600;color:#f5f2ed;line-height:1.1;margin-bottom:16px;}
+.blog-sub{font-size:15px;color:#708090;font-weight:300;max-width:480px;line-height:1.7;}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;}
+.blog-card{background:#1b3022;padding:36px;border:0.5px solid rgba(112,128,144,0.1);transition:all 0.3s;}
+.blog-card:hover{background:#243d2a;}
+.blog-card-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#708090;margin-bottom:14px;}
+.blog-card-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#f5f2ed;line-height:1.3;margin-bottom:12px;}
+.blog-card-excerpt{font-size:13px;color:rgba(245,242,237,0.45);line-height:1.7;font-weight:300;margin-bottom:20px;}
+.blog-card-link{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#708090;text-decoration:none;display:flex;align-items:center;gap:8px;}
+.blog-card-link:hover{color:#f5f2ed;}
+.coming-soon-badge{display:inline-block;background:rgba(112,128,144,0.15);color:#708090;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;margin-bottom:14px;}
+
+/* RESOURCES / AFFILIATE */
+.resources{padding:120px 5%;background:#f5c842;}
+.resources-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,7vw,88px);font-weight:900;color:#1a1a1a;line-height:0.92;margin-bottom:24px;text-transform:uppercase;}
+.resources-sub{font-size:15px;color:rgba(26,26,26,0.6);font-weight:300;max-width:480px;line-height:1.7;margin-bottom:60px;}
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;}
+.resource-card{background:#1a1a1a;padding:32px;transition:all 0.3s;}
+.resource-card:hover{background:#2a2a2a;transform:translateY(-3px);}
+.resource-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#f5a623;margin-bottom:12px;}
+.resource-name{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#f5f2ed;text-transform:uppercase;line-height:1;margin-bottom:8px;}
+.resource-desc{font-size:12px;color:#666;line-height:1.6;font-weight:300;margin-bottom:16px;}
+.resource-link{display:inline-block;background:#f5c842;color:#1a1a1a;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;font-weight:600;text-decoration:none;transition:opacity 0.2s;}
+.resource-link:hover{opacity:0.85;}
+
+/* CONTACT */
+.contact{padding:120px 5%;background:#1b3022;text-align:center;}
+.contact-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:600;color:#f5f2ed;line-height:1.1;margin-bottom:16px;}
+.contact-title em{font-style:italic;color:#708090;}
+.contact-sub{font-size:15px;color:rgba(245,242,237,0.5);font-weight:300;max-width:480px;margin:0 auto 40px;line-height:1.7;}
+.contact-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:60px;}
+.contact-divider{width:60px;height:1px;background:rgba(112,128,144,0.3);margin:0 auto 40px;}
+.social-links{display:flex;gap:24px;justify-content:center;}
+.social-link{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#708090;text-decoration:none;transition:color 0.2s;}
+.social-link:hover{color:#f5f2ed;}
+
+/* FOOTER */
+footer{background:#0f1a14;padding:40px 5%;display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid rgba(112,128,144,0.1);}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#f5f2ed;}
+.footer-copy{font-size:11px;color:#708090;letter-spacing:0.06em;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-bg{display:none;}
+  footer{flex-direction:column;gap:12px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">CashCramming</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Get in touch →</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">Finance</div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      <span class="hero-tag-text">Personal Finance · Made Simple</span>
+    </div>
+    <h1 class="hero-title">The <span>calm</span><br/>side of<br/>finance.</h1>
+    <p class="hero-sub">CashCramming exists for students and young professionals who want to understand money — without the jargon, the overwhelm, or the textbook language nobody actually uses.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">View services →</a>
+      <a href="#blog" class="btn-secondary">Read the blog</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-bg">CC</div>
+  <div class="section-tag">About</div>
+  <div class="about-grid">
+    <div class="about-left">
+      <h2 class="about-title">Finance felt<br/>complicated — <em>until<br/>someone decided<br/>to make it simple.</em></h2>
+      <p>CashCramming was built for students and young professionals who are tired of feeling lost when money is involved.</p>
+      <p>We break down real finance concepts — investments, markets, financial planning — into content that's clear, practical, and actually worth saving.</p>
+      <p>Beyond content, we help finance students and freshers build LinkedIn profiles that work. Keyword-optimised, story-driven, recruiter-ready.</p>
+    </div>
+    <div class="about-right">
+      <div class="about-stat">
+        <div class="about-stat-num">2026</div>
+        <div class="about-stat-label">Founded · Kerala, India</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">100+</div>
+        <div class="about-stat-label">Accounts reached in first week</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">∞</div>
+        <div class="about-stat-label">Finance concepts left to simplify</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-tag" style="color:#708090;">Services</div>
+  <div class="services-header">
+    <h2 class="services-title">Your profile should<br/>open doors, not<br/>close them.</h2>
+    <p class="services-sub">Done-for-you LinkedIn services for finance students and freshers who are serious about their careers.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-tag">Most Popular</div>
+      <div class="service-name">LinkedIn Profile<br/>Makeover</div>
+      <div class="service-desc">Complete profile rewrite — headline, about section, experience, skills, and featured section. Keyword-optimised and recruiter-ready.</div>
+      <div class="service-price">Starting ₹999</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-tag">New</div>
+      <div class="service-name">Monthly Content<br/>Package</div>
+      <div class="service-desc">Done-for-you LinkedIn content. 8–12 finance carousels and posts per month, designed and written for your profile.</div>
+      <div class="service-price">Starting ₹5,999/mo</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-tag">Bundle</div>
+      <div class="service-name">Profile + Content<br/>Bundle</div>
+      <div class="service-desc">Build your profile from scratch, then keep it active with monthly content. The complete LinkedIn growth package.</div>
+      <div class="service-price">Starting ₹6,499/mo</div>
+    </div>
+  </div>
+  <div style="margin-top:40px;text-align:center;">
+    <a href="#contact" class="btn-primary">Book a slot for May →</a>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="section-tag" style="color:#708090;">Blog</div>
+  <div class="blog-header">
+    <h2 class="blog-title">Finance content<br/>that actually<br/>gets read.</h2>
+    <p class="blog-sub">Clear, practical, student-first. No jargon. No textbook language. Just finance that makes sense.</p>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <div class="coming-soon-badge">Coming Soon</div>
+      <div class="blog-card-tag">Investing · Basics</div>
+      <div class="blog-card-title">What Ajay Tyagi's ₹1 Crore Framework Teaches Students With ₹10,000</div>
+      <div class="blog-card-excerpt">A fund manager with ₹2.5 lakh crore AUM shared his exact investment allocation. Here's what it means for students just starting out.</div>
+      <a href="#" class="blog-card-link">Read more →</a>
+    </div>
+    <div class="blog-card">
+      <div class="coming-soon-badge">Coming Soon</div>
+      <div class="blog-card-tag">LinkedIn · Career</div>
+      <div class="blog-card-title">5 Reasons Recruiters Are Ignoring Your Finance Profile</div>
+      <div class="blog-card-excerpt">It's not your grades. It's not your college. It's these five things — and all of them are fixable in under an hour.</div>
+      <a href="#" class="blog-card-link">Read more →</a>
+    </div>
+    <div class="blog-card">
+      <div class="coming-soon-badge">Coming Soon</div>
+      <div class="blog-card-tag">Markets · Explainer</div>
+      <div class="blog-card-title">Types of Derivative Instruments — Explained Without the Textbook</div>
+      <div class="blog-card-excerpt">Everyone says derivatives are risky. The truth? Not understanding them is riskier. A plain-language breakdown.</div>
+      <a href="#" class="blog-card-link">Read more →</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES / AFFILIATE -->
+<section class="resources" id="resources">
+  <div class="section-tag" style="color:rgba(26,26,26,0.4);">Resources</div>
+  <h2 class="resources-title">Tools we<br/>actually use.</h2>
+  <p class="resources-sub">Honest recommendations. Everything here is something worth having if you're serious about finance.</p>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <div class="resource-tag">Investing · Free</div>
+      <div class="resource-name">Zerodha</div>
+      <div class="resource-desc">India's largest stockbroker. Zero brokerage on equity delivery. Where most serious finance students start.</div>
+      <a href="#" class="resource-link">Open account →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-tag">Investing · Free</div>
+      <div class="resource-name">Groww</div>
+      <div class="resource-desc">Mutual funds, stocks, and SIPs in one app. Clean interface, beginner-friendly, no account fees.</div>
+      <a href="#" class="resource-link">Start investing →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-tag">Learning · Free</div>
+      <div class="resource-name">Zerodha Varsity</div>
+      <div class="resource-desc">The best free finance education resource in India. Covers everything from basics to advanced derivatives.</div>
+      <a href="https://zerodha.com/varsity/" class="resource-link" target="_blank">Start learning →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-tag">Design · Freemium</div>
+      <div class="resource-name">Canva Pro</div>
+      <div class="resource-desc">Everything we use to create CashCramming content. Templates, fonts, brand kits. Worth every rupee.</div>
+      <a href="#" class="resource-link">Try free →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-tag" style="color:#708090;justify-content:center;">Get in touch</div>
+  <h2 class="contact-title">Let's build your<br/><em>digital real estate.</em></h2>
+  <p class="contact-sub">5 slots open for May 2026. Profile makeovers, content packages, or just a conversation — DM us and we'll figure out the rest.</p>
+  <div class="contact-actions">
+    <a href="https://instagram.com/cashcramming" class="btn-primary" target="_blank">DM on Instagram →</a>
+    <a href="https://linkedin.com/in/cash-cramming-58a9083b9" class="btn-secondary" style="color:#f5f2ed;border-color:rgba(245,242,237,0.3);" target="_blank">Find us on LinkedIn</a>
+  </div>
+  <div class="contact-divider"></div>
+  <div class="social-links">
+    <a href="https://instagram.com/cashcramming" class="social-link" target="_blank">Instagram</a>
+    <a href="https://linkedin.com/in/cash-cramming-58a9083b9" class="social-link" target="_blank">LinkedIn</a>
+    <a href="https://pinterest.com/cashcramming" class="social-link" target="_blank">Pinterest</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">CashCramming</div>
+  <div class="footer-copy">© 2026 CashCramming · The Calm Side of Finance</div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const links = document.querySelector('.nav-links');
+  const cta = document.querySelector('.nav-cta');
+  if(links.style.display === 'flex'){
+    links.style.display = 'none';
+    if(cta) cta.style.display = 'none';
+  } else {
+    links.style.display = 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '64px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'rgba(245,242,237,0.98)';
+    links.style.padding = '20px 5%';
+    links.style.gap = '20px';
+    links.style.borderBottom = '0.5px solid rgba(27,48,34,0.1)';
+  }
+}
+
+// smooth active nav highlight
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if(window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+current ? '#1b3022' : '';
+  });
+});
+</script>
+</body>
+</html>
