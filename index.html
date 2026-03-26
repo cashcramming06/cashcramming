@@ -125,6 +125,115 @@ footer{background:#0f1a14;padding:40px 5%;display:flex;justify-content:space-bet
   .about-bg{display:none;}
   footer{flex-direction:column;gap:12px;text-align:center;}
 }
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#0f1a14;font-family:'Instrument Sans',sans-serif;color:#f5f2ed;padding:80px 5%;min-height:100vh;}
+
+/* Section header */
+.section-tag{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#708090;font-weight:500;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.section-tag::after{content:'';flex:1;height:1px;background:rgba(112,128,144,0.3);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:600;color:#f5f2ed;line-height:1.1;margin-bottom:12px;}
+.section-title em{font-style:italic;color:#708090;}
+.section-sub{font-size:15px;color:rgba(245,242,237,0.45);font-weight:300;max-width:480px;line-height:1.7;margin-bottom:60px;}
+
+/* Tab switcher */
+.tabs{display:flex;gap:2px;margin-bottom:40px;background:rgba(245,242,237,0.05);padding:4px;border-radius:2px;max-width:600px;}
+.tab{flex:1;padding:10px 16px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#708090;cursor:pointer;font-weight:500;transition:all 0.25s;text-align:center;border-radius:1px;}
+.tab.active{background:#1b3022;color:#f5f2ed;}
+.tab:hover:not(.active){color:#f5f2ed;}
+
+/* Panel */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* ---- SIP CALCULATOR ---- */
+.sip-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+.input-group{margin-bottom:24px;}
+.input-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#708090;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.input-value{font-family:'Cormorant Garamond',serif;font-size:18px;color:#f5f2ed;font-weight:600;}
+input[type=range]{width:100%;-webkit-appearance:none;height:2px;background:rgba(112,128,144,0.3);outline:none;border-radius:1px;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#f5f2ed;cursor:pointer;border:2px solid #1b3022;}
+input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(to right,#708090 var(--pct,50%),rgba(112,128,144,0.2) var(--pct,50%));height:2px;border-radius:1px;}
+
+.result-card{background:#1b3022;padding:36px;border:0.5px solid rgba(112,128,144,0.15);}
+.result-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#708090;margin-bottom:8px;}
+.result-value{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;color:#f5f2ed;line-height:1;margin-bottom:4px;}
+.result-sub{font-size:12px;color:rgba(245,242,237,0.4);margin-bottom:24px;}
+.result-divider{height:1px;background:rgba(112,128,144,0.2);margin:20px 0;}
+.result-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.result-row-label{font-size:12px;color:#708090;}
+.result-row-val{font-size:14px;color:#f5f2ed;font-weight:500;}
+.gain-badge{display:inline-block;background:rgba(76,175,125,0.15);color:#4caf7d;font-size:11px;padding:4px 10px;border-radius:2px;letter-spacing:0.06em;}
+
+/* bar chart */
+.bar-chart{margin-top:20px;display:flex;flex-direction:column;gap:8px;}
+.bar-row{display:flex;align-items:center;gap:10px;}
+.bar-row-label{font-size:11px;color:#708090;width:80px;flex-shrink:0;}
+.bar-track{flex:1;height:6px;background:rgba(112,128,144,0.15);border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;transition:width 0.6s ease;}
+.bar-fill.invested{background:#708090;}
+.bar-fill.returns{background:#4caf7d;}
+.bar-row-val{font-size:11px;color:#f5f2ed;width:80px;text-align:right;flex-shrink:0;}
+
+/* ---- QUIZ ---- */
+.quiz-progress{display:flex;gap:4px;margin-bottom:32px;}
+.quiz-dot{height:3px;flex:1;background:rgba(112,128,144,0.2);border-radius:2px;transition:background 0.3s;}
+.quiz-dot.done{background:#708090;}
+.quiz-dot.active{background:#f5f2ed;}
+.quiz-question{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#f5f2ed;line-height:1.3;margin-bottom:8px;}
+.quiz-qnum{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#708090;margin-bottom:16px;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;margin-top:24px;}
+.quiz-option{background:rgba(245,242,237,0.04);border:0.5px solid rgba(112,128,144,0.2);padding:16px 20px;cursor:pointer;font-size:14px;color:rgba(245,242,237,0.7);transition:all 0.2s;text-align:left;font-family:'Instrument Sans',sans-serif;}
+.quiz-option:hover{background:#1b3022;border-color:#708090;color:#f5f2ed;}
+.quiz-option.selected{background:#1b3022;border-color:#f5f2ed;color:#f5f2ed;}
+
+/* Result */
+.quiz-result{display:none;}
+.quiz-result.show{display:block;}
+.quiz-result-type{font-family:'Barlow Condensed',sans-serif;font-size:64px;font-weight:900;text-transform:uppercase;line-height:0.9;margin-bottom:16px;}
+.quiz-result-badge{display:inline-block;padding:6px 14px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-bottom:16px;}
+.quiz-result-desc{font-size:14px;color:rgba(245,242,237,0.55);line-height:1.75;font-weight:300;max-width:480px;margin-bottom:24px;}
+.quiz-result-tip{background:#1b3022;border-left:2px solid #708090;padding:14px 18px;font-size:13px;color:rgba(245,242,237,0.6);line-height:1.6;font-style:italic;font-family:'Cormorant Garamond',serif;}
+.quiz-restart{margin-top:20px;background:transparent;border:0.5px solid rgba(112,128,144,0.3);color:#708090;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 20px;cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all 0.2s;}
+.quiz-restart:hover{border-color:#f5f2ed;color:#f5f2ed;}
+
+/* ---- SAVINGS TRACKER ---- */
+.savings-header{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px;}
+.savings-stat{background:#1b3022;padding:20px 24px;border:0.5px solid rgba(112,128,144,0.15);}
+.savings-stat-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#708090;margin-bottom:6px;}
+.savings-stat-val{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#f5f2ed;line-height:1;}
+.savings-stat-sub{font-size:11px;color:rgba(245,242,237,0.3);margin-top:2px;}
+
+.goal-form{background:rgba(245,242,237,0.03);border:0.5px solid rgba(112,128,144,0.15);padding:24px;margin-bottom:24px;}
+.goal-form-title{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#708090;margin-bottom:16px;}
+.goal-inputs{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;}
+.goal-input-group label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#708090;display:block;margin-bottom:6px;}
+.goal-input-group input{width:100%;background:rgba(245,242,237,0.05);border:0.5px solid rgba(112,128,144,0.2);color:#f5f2ed;font-size:14px;padding:10px 12px;font-family:'Instrument Sans',sans-serif;outline:none;transition:border-color 0.2s;}
+.goal-input-group input:focus{border-color:#708090;}
+.goal-input-group input::placeholder{color:rgba(245,242,237,0.2);}
+.add-btn{background:#f5f2ed;color:#1b3022;border:none;padding:10px 20px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.2s;white-space:nowrap;}
+.add-btn:hover{opacity:0.85;}
+
+.goals-list{display:flex;flex-direction:column;gap:12px;}
+.goal-item{background:#1b3022;padding:20px 24px;border:0.5px solid rgba(112,128,144,0.1);}
+.goal-item-top{display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;}
+.goal-name{font-size:15px;font-weight:500;color:#f5f2ed;}
+.goal-meta{font-size:12px;color:#708090;}
+.goal-pct{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#f5f2ed;}
+.goal-track{height:4px;background:rgba(112,128,144,0.2);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.goal-bar{height:100%;border-radius:2px;background:#708090;transition:width 0.5s ease;}
+.goal-bar.done{background:#4caf7d;}
+.goal-amounts{display:flex;justify-content:space-between;font-size:11px;color:rgba(245,242,237,0.3);}
+.goal-delete{background:none;border:none;color:rgba(245,242,237,0.2);cursor:pointer;font-size:16px;transition:color 0.2s;padding:0 0 0 12px;}
+.goal-delete:hover{color:#f5f2ed;}
+.empty-state{text-align:center;padding:40px;color:rgba(245,242,237,0.2);font-size:14px;font-weight:300;font-style:italic;font-family:'Cormorant Garamond',serif;}
+
+@media(max-width:640px){
+  .sip-grid{grid-template-columns:1fr;}
+  .savings-header{grid-template-columns:1fr 1fr;}
+  .goal-inputs{grid-template-columns:1fr 1fr;}
+  .add-btn{grid-column:1/-1;}
+}
 </style>
 </head>
 <body>
@@ -135,7 +244,7 @@ footer{background:#0f1a14;padding:40px 5%;display:flex;justify-content:space-bet
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#blog">Blog</a></li>
+    <li><a href="#tools">Tools</a></li>
     <li><a href="#resources">Resources</a></li>
   </ul>
   <a class="nav-cta" href="#contact">Get in touch →</a>
@@ -206,21 +315,21 @@ footer{background:#0f1a14;padding:40px 5%;display:flex;justify-content:space-bet
       <div class="service-tag">Most Popular</div>
       <div class="service-name">LinkedIn Profile<br/>Makeover</div>
       <div class="service-desc">Complete profile rewrite — headline, about section, experience, skills, and featured section. Keyword-optimised and recruiter-ready.</div>
-      <div class="service-price">Starting ₹999</div>
+      <div class="service-price">Starting ₹399</div>
     </div>
     <div class="service-card">
       <div class="service-num">02</div>
       <div class="service-tag">New</div>
       <div class="service-name">Monthly Content<br/>Package</div>
       <div class="service-desc">Done-for-you LinkedIn content. 8–12 finance carousels and posts per month, designed and written for your profile.</div>
-      <div class="service-price">Starting ₹5,999/mo</div>
+      <div class="service-price">Starting ₹699/mo</div>
     </div>
     <div class="service-card">
       <div class="service-num">03</div>
       <div class="service-tag">Bundle</div>
       <div class="service-name">Profile + Content<br/>Bundle</div>
       <div class="service-desc">Build your profile from scratch, then keep it active with monthly content. The complete LinkedIn growth package.</div>
-      <div class="service-price">Starting ₹6,499/mo</div>
+      <div class="service-price">Starting ₹999/mo</div>
     </div>
   </div>
   <div style="margin-top:40px;text-align:center;">
@@ -228,36 +337,316 @@ footer{background:#0f1a14;padding:40px 5%;display:flex;justify-content:space-bet
   </div>
 </section>
 
-<!-- BLOG -->
-<section class="blog" id="blog">
-  <div class="section-tag" style="color:#708090;">Blog</div>
-  <div class="blog-header">
-    <h2 class="blog-title">Finance content<br/>that actually<br/>gets read.</h2>
-    <p class="blog-sub">Clear, practical, student-first. No jargon. No textbook language. Just finance that makes sense.</p>
+<!-- TOOLS / DASHBOARD -->
+<section style="padding:120px 5%;background:#0f1a14;" id="tools">
+<div class="section-tag">Tools · Interactive</div>
+<h2 class="section-title">Your personal <em>finance<br/>dashboard.</em></h2>
+<p class="section-sub">Three tools. Zero jargon. Built for students who are serious about their money.</p>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('sip')">SIP Calculator</div>
+  <div class="tab" onclick="switchTab('quiz')">Money Personality</div>
+  <div class="tab" onclick="switchTab('savings')">Savings Tracker</div>
+</div>
+
+<!-- ======== SIP CALCULATOR ======== -->
+<div class="panel active" id="panel-sip">
+  <div class="sip-grid">
+    <div>
+      <div class="input-group">
+        <div class="input-label">Monthly Investment <span class="input-value" id="sip-amount-val">₹5,000</span></div>
+        <input type="range" id="sip-amount" min="500" max="50000" step="500" value="5000" oninput="calcSIP()"/>
+      </div>
+      <div class="input-group">
+        <div class="input-label">Expected Return (p.a.) <span class="input-value" id="sip-rate-val">12%</span></div>
+        <input type="range" id="sip-rate" min="6" max="20" step="0.5" value="12" oninput="calcSIP()"/>
+      </div>
+      <div class="input-group">
+        <div class="input-label">Investment Period <span class="input-value" id="sip-years-val">10 years</span></div>
+        <input type="range" id="sip-years" min="1" max="40" step="1" value="10" oninput="calcSIP()"/>
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:rgba(245,242,237,0.3);line-height:1.6;">Returns are estimated based on compound interest. Actual market returns may vary.</div>
+    </div>
+    <div>
+      <div class="result-card">
+        <div class="result-label">Total Wealth</div>
+        <div class="result-value" id="sip-total">₹11.6L</div>
+        <div class="result-sub">at the end of your investment period</div>
+        <div class="gain-badge" id="sip-gain-badge">+₹5.6L gain (93%)</div>
+        <div class="result-divider"></div>
+        <div class="result-row"><span class="result-row-label">Amount Invested</span><span class="result-row-val" id="sip-invested">₹6.0L</span></div>
+        <div class="result-row"><span class="result-row-label">Est. Returns</span><span class="result-row-val" id="sip-returns">₹5.6L</span></div>
+        <div class="result-row"><span class="result-row-label">Monthly SIP</span><span class="result-row-val" id="sip-monthly">₹5,000</span></div>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-row-label">Invested</div>
+            <div class="bar-track"><div class="bar-fill invested" id="bar-invested" style="width:52%"></div></div>
+            <div class="bar-row-val" id="bar-invested-val">₹6.0L</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-row-label">Returns</div>
+            <div class="bar-track"><div class="bar-fill returns" id="bar-returns" style="width:48%"></div></div>
+            <div class="bar-row-val" id="bar-returns-val">₹5.6L</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="blog-grid">
-    <div class="blog-card">
-      <div class="coming-soon-badge">Coming Soon</div>
-      <div class="blog-card-tag">Investing · Basics</div>
-      <div class="blog-card-title">What Ajay Tyagi's ₹1 Crore Framework Teaches Students With ₹10,000</div>
-      <div class="blog-card-excerpt">A fund manager with ₹2.5 lakh crore AUM shared his exact investment allocation. Here's what it means for students just starting out.</div>
-      <a href="#" class="blog-card-link">Read more →</a>
+</div>
+
+<!-- ======== QUIZ ======== -->
+<div class="panel" id="panel-quiz">
+  <div id="quiz-container">
+    <div class="quiz-progress" id="quiz-progress"></div>
+    <div class="quiz-qnum" id="quiz-qnum">Question 1 of 5</div>
+    <div class="quiz-question" id="quiz-question"></div>
+    <div class="quiz-options" id="quiz-options"></div>
+  </div>
+  <div class="quiz-result" id="quiz-result">
+    <div class="quiz-result-type" id="result-type"></div>
+    <div class="quiz-result-badge" id="result-badge"></div>
+    <div class="quiz-result-desc" id="result-desc"></div>
+    <div class="quiz-result-tip" id="result-tip"></div>
+    <button class="quiz-restart" onclick="restartQuiz()">Take again →</button>
+  </div>
+</div>
+
+<!-- ======== SAVINGS TRACKER ======== -->
+<div class="panel" id="panel-savings">
+  <div class="savings-header">
+    <div class="savings-stat">
+      <div class="savings-stat-label">Total Goals</div>
+      <div class="savings-stat-val" id="stat-goals">0</div>
+      <div class="savings-stat-sub">active</div>
     </div>
-    <div class="blog-card">
-      <div class="coming-soon-badge">Coming Soon</div>
-      <div class="blog-card-tag">LinkedIn · Career</div>
-      <div class="blog-card-title">5 Reasons Recruiters Are Ignoring Your Finance Profile</div>
-      <div class="blog-card-excerpt">It's not your grades. It's not your college. It's these five things — and all of them are fixable in under an hour.</div>
-      <a href="#" class="blog-card-link">Read more →</a>
+    <div class="savings-stat">
+      <div class="savings-stat-label">Total Target</div>
+      <div class="savings-stat-val" id="stat-target">₹0</div>
+      <div class="savings-stat-sub">across all goals</div>
     </div>
-    <div class="blog-card">
-      <div class="coming-soon-badge">Coming Soon</div>
-      <div class="blog-card-tag">Markets · Explainer</div>
-      <div class="blog-card-title">Types of Derivative Instruments — Explained Without the Textbook</div>
-      <div class="blog-card-excerpt">Everyone says derivatives are risky. The truth? Not understanding them is riskier. A plain-language breakdown.</div>
-      <a href="#" class="blog-card-link">Read more →</a>
+    <div class="savings-stat">
+      <div class="savings-stat-label">Total Saved</div>
+      <div class="savings-stat-val" id="stat-saved">₹0</div>
+      <div class="savings-stat-sub">so far</div>
     </div>
   </div>
+
+  <div class="goal-form">
+    <div class="goal-form-title">Add a new goal</div>
+    <div class="goal-inputs">
+      <div class="goal-input-group">
+        <label>Goal Name</label>
+        <input type="text" id="goal-name" placeholder="e.g. Emergency Fund"/>
+      </div>
+      <div class="goal-input-group">
+        <label>Target Amount (₹)</label>
+        <input type="number" id="goal-target" placeholder="50000"/>
+      </div>
+      <div class="goal-input-group">
+        <label>Saved So Far (₹)</label>
+        <input type="number" id="goal-saved" placeholder="10000"/>
+      </div>
+      <button class="add-btn" onclick="addGoal()">Add Goal</button>
+    </div>
+  </div>
+
+  <div class="goals-list" id="goals-list">
+    <div class="empty-state" id="empty-state">No goals yet. Add one above to get started.</div>
+  </div>
+</div>
+
+<script>
+// ---- SIP CALCULATOR ----
+function fmt(n){
+  if(n>=10000000) return '₹'+(n/10000000).toFixed(1)+'Cr';
+  if(n>=100000) return '₹'+(n/100000).toFixed(1)+'L';
+  if(n>=1000) return '₹'+(n/1000).toFixed(1)+'K';
+  return '₹'+Math.round(n).toLocaleString('en-IN');
+}
+
+function calcSIP(){
+  const P=parseInt(document.getElementById('sip-amount').value);
+  const r=parseFloat(document.getElementById('sip-rate').value)/100/12;
+  const n=parseInt(document.getElementById('sip-years').value)*12;
+  const total=P*((Math.pow(1+r,n)-1)/r)*(1+r);
+  const invested=P*n;
+  const returns=total-invested;
+  const gainPct=Math.round((returns/invested)*100);
+
+  document.getElementById('sip-amount-val').textContent='₹'+P.toLocaleString('en-IN');
+  document.getElementById('sip-rate-val').textContent=document.getElementById('sip-rate').value+'%';
+  document.getElementById('sip-years-val').textContent=document.getElementById('sip-years').value+' years';
+  document.getElementById('sip-total').textContent=fmt(total);
+  document.getElementById('sip-invested').textContent=fmt(invested);
+  document.getElementById('sip-returns').textContent=fmt(returns);
+  document.getElementById('sip-monthly').textContent='₹'+P.toLocaleString('en-IN');
+  document.getElementById('sip-gain-badge').textContent='+'+fmt(returns)+' gain ('+gainPct+'%)';
+  document.getElementById('bar-invested-val').textContent=fmt(invested);
+  document.getElementById('bar-returns-val').textContent=fmt(returns);
+
+  const investedPct=Math.round((invested/total)*100);
+  const returnsPct=100-investedPct;
+  document.getElementById('bar-invested').style.width=investedPct+'%';
+  document.getElementById('bar-returns').style.width=returnsPct+'%';
+
+  // update range track gradient
+  ['sip-amount','sip-rate','sip-years'].forEach(id=>{
+    const el=document.getElementById(id);
+    const pct=((el.value-el.min)/(el.max-el.min)*100).toFixed(1)+'%';
+    el.style.setProperty('--pct',pct);
+  });
+}
+calcSIP();
+
+// ---- QUIZ ----
+const questions=[
+  {q:"You get ₹10,000 unexpectedly. What's your first instinct?",opts:["Put it all in a fixed deposit — safety first","Split it: half save, half invest","Research stocks for a few days then invest","Spend most of it, save a little"]},
+  {q:"How do you feel when the stock market drops 10%?",opts:["Panic and want to sell everything","Stay calm — it'll recover","See it as a buying opportunity","I don't track the market"]},
+  {q:"Your friend tells you about a 'guaranteed 30% return' scheme. You...",opts:["Say no immediately — too risky","Ask for more details before deciding","Get curious and research it","Consider investing a small amount"]},
+  {q:"What's your current relationship with budgeting?",opts:["I track every rupee I spend","I have a rough idea of my spending","I budget only when I feel broke","I don't budget at all"]},
+  {q:"What's your main financial goal right now?",opts:["Build an emergency fund","Start investing regularly","Save for something specific","Pay off debt or reduce expenses"]}
+];
+
+const results=[
+  {type:"The Guardian",color:"#708090",bg:"rgba(112,128,144,0.15)",desc:"Safety is your priority — and that's actually a strength. You protect what you build. The next step is making your safety net work harder for you through low-risk instruments like debt mutual funds and RDs.",tip:"Your CashCramming tip: Start with a liquid fund instead of a savings account. Same safety, better returns."},
+  {type:"The Strategist",color:"#4caf7d",bg:"rgba(76,175,125,0.15)",desc:"You think before you act. You balance risk and reward naturally. You're built for long-term wealth creation — index funds and SIPs are your best friends.",tip:"Your CashCramming tip: Automate your SIP so you invest before you spend. Discipline compounds faster than returns."},
+  {type:"The Explorer",color:"#f5a623",bg:"rgba(245,166,35,0.15)",desc:"You're curious, bold, and not afraid of volatility. That's rare. Channel it right — learn technical analysis, follow market trends, and diversify before you concentrate.",tip:"Your CashCramming tip: Paper trade for 3 months before putting real money in individual stocks. Test your instincts first."},
+  {type:"The Realist",color:"#9b8ecf",bg:"rgba(155,142,207,0.15)",desc:"You're honest about where you are — and that's the starting point for everything. You don't need a complex strategy. You need one simple habit: ₹500 a month in a mutual fund.",tip:"Your CashCramming tip: The best investment is the one you actually make. Start small, start now, adjust later."}
+];
+
+let current=0,scores=[0,0,0,0];
+
+function initQuiz(){
+  current=0;scores=[0,0,0,0];
+  const prog=document.getElementById('quiz-progress');
+  prog.innerHTML='';
+  questions.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='quiz-dot'+(i===0?' active':'');
+    d.id='qdot-'+i;
+    prog.appendChild(d);
+  });
+  renderQuestion();
+  document.getElementById('quiz-container').style.display='block';
+  document.getElementById('quiz-result').classList.remove('show');
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  document.getElementById('quiz-qnum').textContent='Question '+(current+1)+' of '+questions.length;
+  document.getElementById('quiz-question').textContent=q.q;
+  const opts=document.getElementById('quiz-options');
+  opts.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const btn=document.createElement('button');
+    btn.className='quiz-option';
+    btn.textContent=o;
+    btn.onclick=()=>selectAnswer(i);
+    opts.appendChild(btn);
+  });
+}
+
+function selectAnswer(idx){
+  scores[idx]++;
+  document.querySelectorAll('.quiz-option').forEach((b,i)=>b.classList.toggle('selected',i===idx));
+  setTimeout(()=>{
+    const dot=document.getElementById('qdot-'+current);
+    if(dot){dot.classList.remove('active');dot.classList.add('done');}
+    current++;
+    if(current<questions.length){
+      const next=document.getElementById('qdot-'+current);
+      if(next)next.classList.add('active');
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  },400);
+}
+
+function showResult(){
+  const maxScore=Math.max(...scores);
+  const idx=scores.indexOf(maxScore);
+  const r=results[idx];
+  document.getElementById('result-type').textContent=r.type;
+  document.getElementById('result-type').style.color=r.color;
+  document.getElementById('result-badge').textContent='Your Money Personality';
+  document.getElementById('result-badge').style.background=r.bg;
+  document.getElementById('result-badge').style.color=r.color;
+  document.getElementById('result-desc').textContent=r.desc;
+  document.getElementById('result-tip').textContent=r.tip;
+  document.getElementById('quiz-container').style.display='none';
+  document.getElementById('quiz-result').classList.add('show');
+}
+
+function restartQuiz(){initQuiz();}
+initQuiz();
+
+// ---- SAVINGS TRACKER ----
+let goals=[];
+
+function addGoal(){
+  const name=document.getElementById('goal-name').value.trim();
+  const target=parseFloat(document.getElementById('goal-target').value);
+  const saved=parseFloat(document.getElementById('goal-saved').value)||0;
+  if(!name||!target||target<=0) return;
+  goals.push({id:Date.now(),name,target,saved});
+  document.getElementById('goal-name').value='';
+  document.getElementById('goal-target').value='';
+  document.getElementById('goal-saved').value='';
+  renderGoals();
+}
+
+function deleteGoal(id){
+  goals=goals.filter(g=>g.id!==id);
+  renderGoals();
+}
+
+function renderGoals(){
+  const list=document.getElementById('goals-list');
+  const empty=document.getElementById('empty-state');
+  const totalTarget=goals.reduce((s,g)=>s+g.target,0);
+  const totalSaved=goals.reduce((s,g)=>s+g.saved,0);
+  document.getElementById('stat-goals').textContent=goals.length;
+  document.getElementById('stat-target').textContent=fmt(totalTarget);
+  document.getElementById('stat-saved').textContent=fmt(totalSaved);
+
+  if(goals.length===0){
+    list.innerHTML='<div class="empty-state" id="empty-state">No goals yet. Add one above to get started.</div>';
+    return;
+  }
+
+  list.innerHTML=goals.map(g=>{
+    const pct=Math.min(100,Math.round((g.saved/g.target)*100));
+    const done=pct>=100;
+    return `<div class="goal-item">
+      <div class="goal-item-top">
+        <div>
+          <div class="goal-name">${g.name}</div>
+          <div class="goal-meta">${pct}% complete${done?' · Goal reached! 🎉':''}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="goal-pct">${pct}%</div>
+          <button class="goal-delete" onclick="deleteGoal(${g.id})">×</button>
+        </div>
+      </div>
+      <div class="goal-track"><div class="goal-bar${done?' done':''}" style="width:${pct}%"></div></div>
+      <div class="goal-amounts"><span>Saved: ${fmt(g.saved)}</span><span>Target: ${fmt(g.target)}</span></div>
+    </div>`;
+  }).join('');
+}
+renderGoals();
+
+// ---- TAB SWITCHER ----
+function switchTab(tab){
+  document.querySelectorAll('.tab').forEach((t,i)=>{
+    const tabs=['sip','quiz','savings'];
+    t.classList.toggle('active',tabs[i]===tab);
+  });
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+tab).classList.add('active');
+}
+</script>
 </section>
 
 <!-- RESOURCES / AFFILIATE -->
@@ -279,10 +668,10 @@ footer{background:#0f1a14;padding:40px 5%;display:flex;justify-content:space-bet
       <a href="#" class="resource-link">Start investing →</a>
     </div>
     <div class="resource-card">
-      <div class="resource-tag">Learning · Free</div>
-      <div class="resource-name">Zerodha Varsity</div>
-      <div class="resource-desc">The best free finance education resource in India. Covers everything from basics to advanced derivatives.</div>
-      <a href="https://zerodha.com/varsity/" class="resource-link" target="_blank">Start learning →</a>
+      <div class="resource-tag">Investing · Earn ₹300</div>
+      <div class="resource-name">Zerodha Referral</div>
+      <div class="resource-desc">Open a Zerodha account through this link and start investing in stocks and mutual funds. Zero brokerage on equity delivery.</div>
+      <a href="YOUR_ZERODHA_REFERRAL_LINK" class="resource-link" target="_blank">Open account →</a>
     </div>
     <div class="resource-card">
       <div class="resource-tag">Design · Freemium</div>
